@@ -17,12 +17,14 @@ services:
     image: mysql:5.7
     container_name: mysql57
     hostname: mysql
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --explicit_defaults_for_timestamp=true
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql/data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     environment:
       - "MYSQL_ROOT_PASSWORD=root"
-      - "MYSQL_DATABASE=sample"
+      - "MYSQL_DATABASE=application_db"
+      - "MYSQL_USER=matatsuna"
+      - "MYSQL_PASSWORD=matatsuna"
